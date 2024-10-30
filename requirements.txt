@@ -1,3 +1,16 @@
-Flask==2.2.2
-gunicorn
-Werkzeug==2.2.2
+# Web Framework and WSGI Server
+Flask==3.0.3
+gunicorn==21.2.0
+Werkzeug==3.0.3
+
+# Core Libraries
+numpy==1.26.0
+pandas==2.1.1
+scipy==1.11.2
+
+# Machine Learning and Data Science
+scikit-learn==1.3.1
+tensorflow==2.16.1
+matplotlib==3.8.0
+seaborn==0.12.2
+

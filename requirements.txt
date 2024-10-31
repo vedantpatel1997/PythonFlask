@@ -3,36 +3,3 @@ Flask==3.0.3
 gunicorn==21.2.0
 Werkzeug==3.0.3
 
-# Core Libraries
-numpy==1.26.0
-pandas==2.1.1
-scipy==1.11.2
-
-# Machine Learning and Data Science
-scikit-learn==1.3.1
-tensorflow==2.16.1
-matplotlib==3.8.0
-seaborn==0.12.2
-
-
-torch==2.5.1  # PyTorch for deep learning
-azure-search-documents==11.4.0
-azure-keyvault-secrets==4.8.0
-opencensus-ext-azure==1.1.13
-applicationinsights==0.11.10
-opentelemetry-api==1.24.0
-opencensus==0.11.4
-tenacity==8.2.3
-flask_cors==4.0.0
-tiktoken==0.6.0
-openai==1.16.1
-azure-monitor-opentelemetry==1.3.0
-azure-ai-textanalytics==5.2.0
-transformers==4.41.2
-sentence-transformers
-pytest
-pytest-cov
-pytest-azurepipelines
-pyodbc
-azure-monitor-query
-azure-identity

@@ -5,6 +5,12 @@ from flask import (
     send_from_directory, url_for
 )
 
+# ✅ External library used here
+from dateutil import parser  # Not in requirements.txt? BOOM — deployment breaks
+
+# Example usage
+parsed_date = parser.parse("2025-08-01T15:30:00Z")
+
 # Configure logging
 logging.basicConfig(
     level=logging.INFO,
@@ -15,7 +21,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    app.logger.info('GET / - index page requested')
+    app.logger.info(f'GET / - index page requested, parsed_date = {parsed_date}')
     return render_template('index.html')
 
 @app.route('/favicon.ico')
@@ -38,6 +44,6 @@ def hello():
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
     debug_mode = os.environ.get('DEBUG', 'False').lower() == 'true'
-    
+
     app.logger.info(f"Starting Flask app on port {port} with debug={debug_mode}")
     app.run(host='0.0.0.0', port=port, debug=debug_mode, threaded=True)

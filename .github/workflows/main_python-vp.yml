@@ -7,7 +7,7 @@ name: Build and deploy Python app to Azure Web App - python-vp
 on:
   push:
     branches:
-      - main
+      - main12
   workflow_dispatch:
 
 jobs:
@@ -68,6 +68,7 @@ jobs:
           slot-name: 'Production'
 
           
+
 
 
 

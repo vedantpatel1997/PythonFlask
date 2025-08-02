@@ -7,7 +7,7 @@ name: Build and deploy Python app to Azure Web App - python-vp
 on:
   push:
     branches:
-      - main12
+      - main
   workflow_dispatch:
 
 jobs:
@@ -26,9 +26,11 @@ jobs:
 
       - name: Create and start virtual environment
         run: |
-          python -m venv antenv
-          source antenv/bin/activate
-          pip install -r requirements.txt
+          python -m venv venv
+          source venv/bin/activate
+      
+      - name: Install dependencies
+        run: pip install -r requirements.txt
         
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
 
@@ -38,7 +40,7 @@ jobs:
           name: python-app
           path: |
             .
-            # !venv/
+            !venv/
 
   deploy:
     runs-on: ubuntu-latest
@@ -56,9 +58,9 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_0FFA2F3E9CE54F1C96042202D2A98842 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_29C50790E6F04966B321C41452598906 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_081C822817B643B48E7466BFF74AB655 }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_5715645F6C0441A48B4979BCD57B240D }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_8144206AEA834C72BA9C1885A2B9762C }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_229BA63765DC4951AC93C4D260843965 }}
 
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v3
@@ -66,11 +68,4 @@ jobs:
         with:
           app-name: 'python-vp'
           slot-name: 'Production'
-
           
-
-
-
-
-
-

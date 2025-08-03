@@ -21,10 +21,10 @@ python3 -m pip list
 
 # Application startup
 echo "[INFO] Launching Gunicorn with Uvicorn worker..."
-echo "[INFO] Command: gunicorn --worker-class uvicorn.workers.UvicornWorker --timeout 600 --access-logfile '-' --error-logfile '-' app:app"
+echo "[INFO] Command: gunicorn -w 4 -b 0.0.0.0:8000 app:app"
 
 # Start Gunicorn
-gunicorn --worker-class uvicorn.workers.UvicornWorker --timeout 600 --access-logfile '-' --error-logfile '-' app:app
+gunicorn -w 4 -b 0.0.0.0:8000 app:app
 
 # Log if execution falls through (shouldn't happen unless error occurs)
 echo "[ERROR] Gunicorn process exited unexpectedly."

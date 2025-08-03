@@ -42,7 +42,7 @@ def hello():
         return redirect(url_for('index'))
 
 if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 5000))
+    port = int(os.environ.get('PORT', 8000))
     debug_mode = os.environ.get('DEBUG', 'False').lower() == 'true'
 
     app.logger.info(f"Starting Flask app on port {port} with debug={debug_mode}")

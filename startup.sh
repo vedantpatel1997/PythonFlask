@@ -52,7 +52,7 @@ WORKERS=4
 echo -e "$INFO Starting Gunicorn server..."
 echo -e "$INFO Command: gunicorn -w $WORKERS -b $BIND_ADDRESS $APP_MODULE"
 
-gunicorn -w 4 -b 0.0.0.0:8000 app:app
+gunicorn -w $WORKERS -b $BIND_ADDRESS $APP_MODULE
 
 GUNICORN_EXIT_CODE=$?
 

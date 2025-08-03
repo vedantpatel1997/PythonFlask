@@ -67,4 +67,5 @@ jobs:
           app-name: 'python-vp'
           slot-name: 'Production'
           startup-command: './startup.sh'
+          clean: true
           

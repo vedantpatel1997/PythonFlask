@@ -26,10 +26,11 @@ jobs:
 
       - name: Create and start virtual environment
         run: |
-          python -m venv vedantVirtualEnvironment
-          source vedantVirtualEnvironment/bin/activate
-          pip install --upgrade pip
-          pip install -r requirements.txt
+          python -m venv venv
+          source venv/bin/activate
+      
+      - name: Install dependencies
+        run: pip install -r requirements.txt
         
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
 
@@ -39,6 +40,7 @@ jobs:
           name: python-app
           path: |
             .
+            !venv/
 
   deploy:
     runs-on: ubuntu-latest
@@ -56,9 +58,9 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_5715645F6C0441A48B4979BCD57B240D }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_8144206AEA834C72BA9C1885A2B9762C }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_229BA63765DC4951AC93C4D260843965 }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_9F9C03D077CC4EBBB928A6DFF89B592E }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_9EFACEA4D9234CDFB0A6B853C34C2537 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_9CB876F44AA74B939B89EA89C1596601 }}
 
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v3
@@ -66,6 +68,4 @@ jobs:
         with:
           app-name: 'python-vp'
           slot-name: 'Production'
-          startup-command: './startup.sh'
-          clean: true
           

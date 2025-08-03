@@ -2,7 +2,7 @@
 Flask==3.0.3
 gunicorn==21.2.0
 python-dateutil
-
+uvicorn[standard]
 # Werkzeug==3.0.3
 
 # # Core Libraries

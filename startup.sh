@@ -1,32 +1,72 @@
 #!/bin/bash
 
-echo "========== [Startup Script Initiated] =========="
+#=============================#
+#      Custom Startup Log     #
+#=============================#
 
-# Log current working directory and timestamp
-echo "[INFO] Current Directory: $(pwd)"
-echo "[INFO] Script Executed At: $(date)"
+# Define color-coded log prefixes
+INFO="\033[1;34m[INFO]\033[0m"
+WARN="\033[1;33m[WARN]\033[0m"
+ERROR="\033[1;31m[ERROR]\033[0m"
+SUCCESS="\033[1;32m[SUCCESS]\033[0m"
+SECTION="\033[1;35m====>\033[0m"
 
-# Set custom virtual environment path
+echo -e "$SECTION \033[1mStartup Script Initiated\033[0m"
+echo -e "$INFO Timestamp       : $(date)"
+echo -e "$INFO Hostname        : $(hostname)"
+echo -e "$INFO Working Dir     : $(pwd)"
+echo -e "$INFO User            : $(whoami)"
+
+#=============================#
+#   Set and Verify VENV PATH  #
+#=============================#
+
 VENV_PATH="/home/site/wwwroot/vedantVirtualEnvironment/lib/python3.12/site-packages"
-echo "[INFO] Setting PYTHONPATH to: $VENV_PATH"
-export PYTHONPATH=$PYTHONPATH:"$VENV_PATH"
+echo -e "$INFO Configuring PYTHONPATH..."
+export PYTHONPATH="$PYTHONPATH:$VENV_PATH"
+echo -e "$SUCCESS PYTHONPATH set to: $PYTHONPATH"
 
-# Log Python version (to verify Azure compatibility)
-echo "[INFO] Using Python Version:"
-python3 --version
+#=============================#
+#     Python Environment      #
+#=============================#
 
-# Log installed packages (if needed for debugging)
-echo "[INFO] Installed Python packages:"
-python3 -m pip list
+echo -e "$INFO Verifying Python installation..."
+if command -v python3 &>/dev/null; then
+    echo -e "$SUCCESS Python Version  : $(python3 --version)"
+else
+    echo -e "$ERROR Python3 not found in path!"
+    exit 1
+fi
 
-# Application startup
-echo "[INFO] Launching Gunicorn with Uvicorn worker..."
-echo "[INFO] Command: gunicorn -w 4 -b 0.0.0.0:8000 app:app"
+echo -e "$INFO Listing installed packages..."
+python3 -m pip list || echo -e "$WARN Could not list Python packages."
 
-# Start Gunicorn
-gunicorn -w 4 -b 0.0.0.0:8000 app:app
+#=============================#
+#     Gunicorn Execution      #
+#=============================#
 
-# Log if execution falls through (shouldn't happen unless error occurs)
-echo "[ERROR] Gunicorn process exited unexpectedly."
+APP_MODULE="app:app"
+BIND_ADDRESS="0.0.0.0:8000"
+WORKERS=4
 
-echo "========== [Startup Script Completed] =========="
+echo -e "$INFO Starting Gunicorn server..."
+echo -e "$INFO Command: gunicorn -w $WORKERS -b $BIND_ADDRESS $APP_MODULE"
+
+gunicorn --worker-class uvicorn.workers.UvicornWorker \
+         -w $WORKERS \
+         -b $BIND_ADDRESS \
+         $APP_MODULE
+
+GUNICORN_EXIT_CODE=$?
+
+#=============================#
+#       Final Logging         #
+#=============================#
+
+if [[ $GUNICORN_EXIT_CODE -ne 0 ]]; then
+    echo -e "$ERROR Gunicorn exited with code: $GUNICORN_EXIT_CODE"
+else
+    echo -e "$SUCCESS Gunicorn exited normally."
+fi
+
+echo -e "$SECTION \033[1mStartup Script Completed\033[0m"

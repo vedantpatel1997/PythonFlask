@@ -74,10 +74,10 @@ def get_ip_info():
         app.logger.error(f"IP fetch failed: {e}")
         return jsonify({"error": "Could not retrieve IP info"}), 500
 
-# @app.route('/api/uuid')
-# def generate_uuid():
-#     uid = str(uuid.uuid4())
-#     return jsonify({"uuid": uid})
+@app.route('/api/uuid')
+def generate_uuid():
+    uid = str(uuid.uuid4())
+    return jsonify({"uuid": uid})
 
 @app.route('/api/fakeuser')
 def fake_user():

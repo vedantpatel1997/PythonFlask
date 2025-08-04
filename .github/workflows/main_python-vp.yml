@@ -65,7 +65,7 @@ jobs:
         run: |
           az webapp config appsettings set \
             --name python-vp \
-            --resource-group YOUR_RESOURCE_GROUP \
+            --resource-group TempRG \
             --settings \
               PORT=8000 \
               WEBSITE_HTTPLOGGING_RETENTION_DAYS=5 \

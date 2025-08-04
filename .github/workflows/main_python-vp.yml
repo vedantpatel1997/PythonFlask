@@ -60,6 +60,18 @@ jobs:
           client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_9F9C03D077CC4EBBB928A6DFF89B592E }}
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_9EFACEA4D9234CDFB0A6B853C34C2537 }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_9CB876F44AA74B939B89EA89C1596601 }}
+      
+      - name: 'Set App Settings'
+        run: |
+          az webapp config appsettings set \
+            --name python-vp \
+            --resource-group YOUR_RESOURCE_GROUP \
+            --settings \
+              PORT=8000 \
+              WEBSITE_HTTPLOGGING_RETENTION_DAYS=5 \
+              SCM_DO_BUILD_DURING_DEPLOYMENT=0 \
+              SIGNER_SECRET=VedantPatel \
+              DEBUG=true
 
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v3
@@ -69,4 +81,3 @@ jobs:
           slot-name: 'Production'
           clean: true
           startup-command: './startup.sh'
-          

@@ -9,7 +9,7 @@
     <main>
         <div class="px-4 py-3 my-2 text-center">
             <img class="d-block mx-auto mb-4" src="{{ url_for('static', filename='images/azure-icon.svg') }}" alt="Azure Logo" width="192" height="192"/>
-            <h1 class="display-6 fw-bold text-primary">Welcome to Azure, Vedant Patel 😎!</h1>            
+            <h1 class="display-6 fw-bold text-primary">Welcome to Azure, Vedant Patel😎</h1>            
         </div>
 
         <form method="post" action="{{ url_for('hello') }}">
@@ -24,12 +24,15 @@
             </div>
         </form>
 
-        <div class="col-md-6 mx-auto text-center mt-4">
+        <div class="col-md-6 mx-auto text-center mt-5">
             <hr>
-            <h5 class="fw-bold">API Endpoints (10.0)</h5>
-            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-                <a href="{{ url_for('get_timezones') }}" class="btn btn-outline-secondary px-4">📅 View Timezones JSON</a>
-                <a href="{{ url_for('get_ip_info') }}" class="btn btn-outline-info px-4">🌐 View IP Info</a>
+            <h5 class="fw-bold mb-3">🛠️ Test Endpoints (10.00)</h5>
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center flex-wrap">
+                <a href="{{ url_for('get_timezones') }}" class="btn btn-outline-secondary">📅 Timezones</a>
+                <a href="{{ url_for('get_ip_info') }}" class="btn btn-outline-info">🌐 Your IP</a>
+                <a href="/api/uuid" class="btn btn-outline-dark">🆔 Generate UUID</a>
+                <a href="/api/fakeuser" class="btn btn-outline-success">👤 Fake User</a>
+                <a href="/api/env" class="btn btn-outline-warning">🔐 Show Env</a>
             </div>
         </div>
     </main>

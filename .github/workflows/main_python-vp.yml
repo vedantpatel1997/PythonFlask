@@ -24,12 +24,12 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Create, start virtual environment and install dependencies
-        run: |
-          python -m venv vedantVirtualEnvironment
-          source vedantVirtualEnvironment/bin/activate
-          pip install --upgrade pip
-          pip install -r requirements.txt
+      # - name: Create, start virtual environment and install dependencies
+      #   run: |
+      #     python -m venv vedantVirtualEnvironment
+      #     source vedantVirtualEnvironment/bin/activate
+      #     pip install --upgrade pip
+      #     pip install -r requirements.txt
         
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
 
@@ -39,7 +39,6 @@ jobs:
           name: python-app
           path: |
             .
-            !venv/
 
   deploy:
     runs-on: ubuntu-latest
@@ -69,7 +68,7 @@ jobs:
             --settings \
               PORT=8000 \
               WEBSITE_HTTPLOGGING_RETENTION_DAYS=5 \
-              SCM_DO_BUILD_DURING_DEPLOYMENT=0 \
+              SCM_DO_BUILD_DURING_DEPLOYMENT=1 \
               SIGNER_SECRET=VedantPatel \
               DEBUG=true
 
@@ -80,4 +79,4 @@ jobs:
           app-name: 'python-vp'
           slot-name: 'Production'
           clean: true
-          startup-command: './startup.sh'
+          # startup-command: './startup.sh'

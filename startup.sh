@@ -46,7 +46,7 @@ python3 -m pip list || echo -e "$WARN Could not list Python packages."
 #=============================#
 
 APP_MODULE="app:app"
-BIND_ADDRESS="0.0.0.0:8000"
+BIND_ADDRESS="0.0.0.0:5000"
 WORKERS=4
 
 echo -e "$INFO Starting Gunicorn server..."

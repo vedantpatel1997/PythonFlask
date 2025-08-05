@@ -73,7 +73,7 @@ jobs:
             --name python-vp \
             --resource-group TempRG \
             --settings \
-              PORT=8000 \
+              PORT=5000 \
               WEBSITE_HTTPLOGGING_RETENTION_DAYS=5 \
               SCM_DO_BUILD_DURING_DEPLOYMENT=0 \
               SIGNER_SECRET=VedantPatel \

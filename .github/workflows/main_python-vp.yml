@@ -65,8 +65,7 @@ jobs:
           app-name: 'python-vp'
           slot-name: 'Production'
           clean: true
-          startup-command: ''
-          # startup-command: './startup.sh'
+        # startup-command: './startup.sh'
 
       # - name: 'Set App Settings'
       #   run: |

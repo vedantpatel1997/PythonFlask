@@ -113,3 +113,4 @@ if __name__ == '__main__':
 # python.exe -m pip install --upgrade pip
 # pip install -r requirements.txt
 # pip freeze > requirements.txt
+# pip install Flask Flask-Cors pandas requests Faker python-dotenv pytz itsdangerous python-dateutil
